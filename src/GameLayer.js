@@ -3,13 +3,21 @@ var GameLayer = cc.LayerColor.extend({
         this._super( new cc.Color4B( 127, 127, 127, 255 ) );
         this.setPosition( new cc.Point( 0, 0 ) );
         
-        this.back = new Background();
-        this.back.setPosition(100,200);
-        this.back.setScale(1.5);
-        this.addChild( this.back);
+        this.background1 = new Background();
+        this.background1.setPosition(100,200);
+        // this.background1.setScale(1.5);
+        this.addChild( this.background1);
 
-        this.player = new Player(10*40 + 20, 6*40 + 20);
-        this.player.setPosition( new cc.Point( screenWidth / 2, screenHeight / 2 ) );
+        this.coin = new Coin();
+        this.coin.setPosition(100,200);
+        this.coin.setScale(1.5);
+        this.addChild( this.coin);
+
+        this.obstacle = new Obstacle();
+        this.obstacle.setPosition(200,200);
+        this.addChild( this.obstacle);
+
+        this.player = new Player(screenWidth / 2,screenHeight / 2);
         this.addChild( this.player );
 
         this.player.scheduleUpdate();
@@ -17,20 +25,17 @@ var GameLayer = cc.LayerColor.extend({
         return true;
     },
      onKeyDown: function( e ) {
-        switch( e ) {
-        case cc.KEY.left:
+        if (e === cc.KEY.left)
             this.player.setDirection( Player.DIR.LEFT );
-            break;
-        case cc.KEY.right:
+        if (e === cc.KEY.right)
             this.player.setDirection( Player.DIR.RIGHT );
-            break;
-        case cc.KEY.up:
+        if (e === cc.KEY.up)
             this.player.setDirection( Player.DIR.UP );
-            break;
-        case cc.KEY.down:
+        if (e === cc.KEY.down)
             this.player.setDirection( Player.DIR.DOWN );
-            break;
-        }
+    },
+     onKeyUp: function( e ) {
+         this.player.setDirection( Player.DIR.STILL );
     }
 });
 

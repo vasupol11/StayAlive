@@ -14,7 +14,9 @@
         appFiles:[
             'src/GameLayer.js',     //add your own files in order here
             'src/Player.js',
-            'src/Background.js'
+            'src/Background.js',
+            'src/Coin.js',
+            'src/Obstacle.js'
         ]
     };
 
