@@ -1,4 +1,3 @@
-
 var Player = cc.Sprite.extend({
     ctor: function( ) {
     	this.direction = Player.DIR.STILL;

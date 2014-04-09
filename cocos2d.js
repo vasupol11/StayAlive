@@ -18,6 +18,8 @@
             'src/Coin.js',
             'src/Obstacle.js',
             'src/Map1.js'
+            'src/Obstacle.js'
+
         ]
     };
 
