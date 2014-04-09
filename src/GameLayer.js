@@ -17,7 +17,7 @@ var GameLayer = cc.LayerColor.extend({
         this.addChild(this.coin);
 
          this.obstacle = new Obstacle();
-        this.obstacle.setPosition(200,200);
+        this.obstacle.setPosition(300,400);
         this.addChild( this.obstacle);
 
         this.player = new Player();

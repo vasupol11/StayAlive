@@ -32,18 +32,18 @@ var Map1 = cc.Node.extend({
     
         ];
         for ( var r = 0; r < this.HEIGHT; r++ ) {
-        for ( var c = 0; c < this.WIDTH; c++ ) {
-        if ( this.MAP[ r ][ c ] == '#' ) {
-            var s = cc.Sprite.create( 'Images/wall.png' );
-            s.setAnchorPoint( cc.p( 0, 0 ) );
-            s.setPosition( cc.p( c * 20, (this.HEIGHT - r -1) * 20 ) );
-            this.addChild( s );
-        }
-        if ( this.MAP[ r ][ c ] == '-' ) {
-            var s = cc.Sprite.create( 'Images/start.png' );
-            s.setAnchorPoint( cc.p( 0, 0 ) );
-            s.setPosition( cc.p( c * 20, (this.HEIGHT - r -1) * 20 ) );
-            this.addChild( s );
+            for ( var c = 0; c < this.WIDTH; c++ ) {
+                if ( this.MAP[ r ][ c ] == '#' ) {
+                    var s = cc.Sprite.create( 'Images/wall.png' );
+                    s.setAnchorPoint( cc.p( 0, 0 ) );
+                    s.setPosition( cc.p( c * 20, (this.HEIGHT - r -1) * 20 ) );
+                    this.addChild( s );
+                }
+                if ( this.MAP[ r ][ c ] == '-' ) {
+                    var s = cc.Sprite.create( 'Images/start.png' );
+                    s.setAnchorPoint( cc.p( 0, 0 ) );
+                    s.setPosition( cc.p( c * 20, (this.HEIGHT - r -1) * 20 ) );
+                    this.addChild( s );
         }
         }
     }
