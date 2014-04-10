@@ -10,7 +10,8 @@ var Player = cc.Sprite.extend({
         this.playermove = 3;
         this.scheduleUpdate();
     },
-     switchDirection: function(direction) {
+    
+    switchDirection: function(direction) {
     if ( direction == 1 ) {
         this.isUp = true;
         this.setRotation( 0 );
@@ -40,7 +41,8 @@ var Player = cc.Sprite.extend({
         else if (direction == 3)
             this.isLeft = false;
     },
-     update: function( dt ) {   
+   
+    update: function( dt ) {   
     var pos = this.getPosition();
     if (this.isUp ){
         if ( pos.y < screenHeight-35  ) {
@@ -71,11 +73,12 @@ var Player = cc.Sprite.extend({
         }
     }   
     },
+    
     closeTo: function( obj ) {
     var myPos = this.getPosition();
     var oPos = obj.getPosition();
-    return ( ( Math.abs( myPos.x - oPos.x ) <= 16 ) &&
-         ( Math.abs( myPos.y - oPos.y ) <= 16 ) );
+    return ( ( Math.abs( myPos.x - oPos.x ) <= 25 ) &&
+         ( Math.abs( myPos.y - oPos.y ) <= 25 ) );
     }
    
 });
