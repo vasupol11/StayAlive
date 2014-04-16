@@ -38,7 +38,7 @@ var Map1 = cc.Node.extend({
 
         this.createBlackBlock();
         
-        
+        //LvL 1 90% 50 mins
     },
 
     createBlackBlock: function(){

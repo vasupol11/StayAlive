@@ -11,6 +11,8 @@ var ฺสนแา = cc.Sprite.extend({
         return ( ( Math.abs( myPos.x - oPos.x ) <= 20 ) &&
         ( Math.abs( myPos.y - oPos.y ) <= 20 ) );
     }
-    
+
+    //8 mins, i didnt even time this but i am testing how my block should work. I copied code from coin.
+
     
 });

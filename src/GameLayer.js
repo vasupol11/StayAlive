@@ -105,6 +105,8 @@ var GameLayer = cc.LayerColor.extend({
             // this.player.setPosition( pos.x, pos.y );
             this.player.isRight == false;
 
+            //20% 45 mins
+
         }
         
     
