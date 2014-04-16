@@ -9,7 +9,8 @@ var GameLayer = cc.LayerColor.extend({
         this.addCoin();
         this.addObstacle();
         this.addPlayer();
-
+     
+        
         this.scheduleUpdate();
         this.setKeyboardEnabled( true );
         
@@ -56,8 +57,8 @@ var GameLayer = cc.LayerColor.extend({
     addPlayer: function(){
 
         this.player = new Player();
-        this.addChild( this.player );
         this.player.setPosition(100,300);
+        this.addChild( this.player );
 
     },
 
@@ -92,9 +93,20 @@ var GameLayer = cc.LayerColor.extend({
         if (this.coin.closeTo(this.player)){
             this.removeChild(this.coin);
         }
-        if (this.player.closeTo(this.obstacle)){
-            this.player.setPosition(100,300);
+        if (this.coin2.closeTo(this.player)){
+            this.removeChild(this.coin2);
         }
+        if (this.player.closeTo(this.obstacle)){
+            // var pos = this.player.getPosition();
+            // var ojtpos = this.obstacle.getPostition();
+            // // this.player.setPosition(100,300);
+            // if( pos.y < ojtpos.y)
+
+            // this.player.setPosition( pos.x, pos.y );
+            this.player.isRight == false;
+
+        }
+        
     
     }
 

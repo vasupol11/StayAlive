@@ -1,8 +1,12 @@
+
 var Map1 = cc.Node.extend({
-    ctor: function() {
+    ctor: function( ) {
         this._super();
         this.WIDTH = 40;
         this.HEIGHT = 25;
+        this.arrayOfBlackBlockPosition = new Array();
+        this.arrayOfGreenBlockPosition = new Array();
+        this.scheduleUpdate();
         this.MAP = [
             '...............................#####....',
             '...............................#---#....',
@@ -19,9 +23,9 @@ var Map1 = cc.Node.extend({
             '.#----................................#.',
             '.#####................................#.',
             '.....#................................#.',
-            '....##................................#.',
-            '....#.................................#.',
-            '....##----#############################.',
+            '.....#................................#.',
+            '.....#................................#.',
+            '.....#----#############################.',
             '.....#----#..............................',
             '.....######.............................',
             '........................................',
@@ -31,23 +35,33 @@ var Map1 = cc.Node.extend({
             '........................................'
     
         ];
+
+        this.createBlackBlock();
+        
+        
+    },
+
+    createBlackBlock: function(){
+
         for ( var r = 0; r < this.HEIGHT; r++ ) {
             for ( var c = 0; c < this.WIDTH; c++ ) {
                 if ( this.MAP[ r ][ c ] == '#' ) {
-                    var s = cc.Sprite.create( 'Images/wall.png' );
-                    s.setAnchorPoint( cc.p( 0, 0 ) );
-                    s.setPosition( cc.p( c * 20, (this.HEIGHT - r -1) * 20 ) );
-                    this.addChild( s );
+                    blackBlock = cc.Sprite.create( 'Images/wall.png' );
+                    blackBlock.setAnchorPoint( cc.p( 0, 0 ) );
+                    blackBlock.setPosition( cc.p( c * 20, (this.HEIGHT - r -1) * 20 ) );
+                    this.arrayOfBlackBlockPosition = (blackBlock.getPosition());
+                    this.addChild( blackBlock );
                 }
                 if ( this.MAP[ r ][ c ] == '-' ) {
-                    var s = cc.Sprite.create( 'Images/start.png' );
-                    s.setAnchorPoint( cc.p( 0, 0 ) );
-                    s.setPosition( cc.p( c * 20, (this.HEIGHT - r -1) * 20 ) );
-                    this.addChild( s );
+                    var greenBlock = cc.Sprite.create( 'Images/start.png' );
+                    greenBlock.setAnchorPoint( cc.p( 0, 0 ) );
+                    greenBlock.setPosition( cc.p( c * 20, (this.HEIGHT - r -1) * 20 ) );
+                    this.arrayOfGreenBlockPosition = (greenBlock.getPosition());
+                    this.addChild( greenBlock );
+                }
+            }
         }
-        }
-    }
-        // ...  code for drawing the maze has be left out
- 
-    }
+    
+    },
+
 });

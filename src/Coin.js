@@ -28,4 +28,5 @@ var Coin = cc.Sprite.extend({
         ( Math.abs( myPos.y - oPos.y ) <= 20 ) );
     }
 
+    
 });
