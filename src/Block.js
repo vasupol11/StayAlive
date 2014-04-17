@@ -1,8 +1,8 @@
 var Block = cc.Sprite.extend({
     ctor: function() {
         this._super();
-        this.initWithFile( 'Images/wall.png', cc.rect( 0, 0, 20, 20) );  
-        this.setAnchorPoint ( cc.p(0.5,0.5));
+        this.initWithFile( 'Images/wall.png');  
+        this.setAnchorPoint(0.5,0.5);
         this.scheduleUpdate();
 
     },
@@ -23,13 +23,10 @@ var Block = cc.Sprite.extend({
     },
 
     closeTo: function( playerPos ) {
-        var distance = cc.pDistance(this.getPosition, playerPos);
-        if ( distance <= 10) {
-            return true;
-        }
-        else{
-            return false;
-        }
+        var myPos = this.getPosition();
+        // console.log(myPos.x +" " + myPos.y + "/" + playerPos.x + " " + playerPos.y);
+        return ( ( Math.abs( myPos.x - playerPos.x ) <= 20 ) &&
+        ( Math.abs( myPos.y - playerPos.y ) <= 20 ) );
         
     }
 
