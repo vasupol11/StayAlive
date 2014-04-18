@@ -19,7 +19,8 @@
             'src/Obstacle.js',
             'src/Map1.js',
             'src/Obstacle.js',
-            'src/Block.js'
+            'src/Block.js',
+            'src/GreenBlock.js'
             
         ]
     };

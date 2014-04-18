@@ -48,8 +48,8 @@ var GameLayer = cc.LayerColor.extend({
 
     addObstacle: function(){
 
-        this.obstacle = new Obstacle();
-        this.obstacle.setPosition(300,400);
+        this.obstacle = new Obstacle( this.maze );
+        this.obstacle.setPosition(300,380);
         this.addChild( this.obstacle);
 
     },
@@ -57,7 +57,7 @@ var GameLayer = cc.LayerColor.extend({
     addPlayer: function(){
 
         this.player = new Player(this);
-        this.player.setPosition(100,280);
+        this.player.setPosition(this.player.playerPosition);
         this.addChild( this.player );
 
     },
@@ -97,9 +97,7 @@ var GameLayer = cc.LayerColor.extend({
             this.removeChild(this.coin2);
         }
         if (this.player.closeTo(this.obstacle)){
-            this.player.setPosition(100,280);
-
-            //20% 45 mins
+            this.player.setPosition(this.player.playerPosition);
 
         }
 
