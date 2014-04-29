@@ -11,7 +11,7 @@ var GreenBlock = cc.Sprite.extend({
         var myPos = this.getPosition();
         return ( ( Math.abs( myPos.x - playerPos.x ) <= 20 ) &&
         ( Math.abs( myPos.y - playerPos.y ) <= 20 ) );
-        
+        //wewewe
     }
     
 });
