@@ -66,8 +66,8 @@ var Player = cc.Sprite.extend({
 
         for( var i =0 ; i < this.game.maze.greenBlocks.length ; i++ ) {
             if( this.game.maze.greenBlocks[i].closeTo( nextPos ) == true) {
-                
-                this.safenum = i;
+                if( i >= Math.floor(i/9) * 9 && i <= ((Math.floor(i/9) + 1) * 9)-1)
+                this.safenum = Math.floor(i/9) * 9 + 4;
                 return true;
 
             }
