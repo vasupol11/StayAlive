@@ -75,7 +75,7 @@ var GameLayer = cc.LayerColor.extend({
    
     },
     
-    onKeyUp: function(e){
+    onKeyUp: function(e ){
       
         if (e == cc.KEY.up)
             this.player.switchDirectionRelease(1);
