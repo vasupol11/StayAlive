@@ -74,8 +74,7 @@ var GameLayer = cc.LayerColor.extend({
 
         this.scoreLabel = cc.LabelTTF.create( '0', 'Arial', 40 );
         this.scoreLabel.setPosition( new cc.Point( 750, 550 ) );
-        this.addChild( this.scoreLabel );
-        
+        this.addChild( this.scoreLabel );  
     
     },
 
@@ -105,18 +104,33 @@ var GameLayer = cc.LayerColor.extend({
    
     },
 
-    rebirthPlayer: function(){
-        
-        this.player.runAction(cc.FadeTo.create(0.2,50));
+    fadeOutPlayer: function(){
+        this.player.runAction(cc.FadeTo.create(0.2,50));         
+    },
+
+    fadeInPlayer: function(){
+
+    },
+
+    increaseScore: function(){
         this.scoreLabel.setString( this.score += 1 );
-               
     },
 
     collectCoin: function( obj ){
         if (obj.closeTo(this.player)){
             this.removeChild(obj);
         }
+    },
 
+    hitObstacle: function(obj){
+        if (this.player.closeTo(obj)){
+            this.fadeOutPlayer();
+            this.repositionPlayer();
+        }
+    },
+
+    repositionPlayer: function(){
+        this.player.setPosition(this.player.playerPosition);
     },
 
     update: function(){
@@ -125,10 +139,13 @@ var GameLayer = cc.LayerColor.extend({
         for(var i = 0; i < 2; i++){
             this.collectCoin(this.coins[i]);
         }
+
+        this.hitObstacle(this.obstacle);
         
-        if (this.player.closeTo(this.obstacle)){
-            this.rebirthPlayer();
-        }
+        
+        // if (this.player.closeTo(this.obstacle)){
+        //     this.rebirthPlayer();
+        // }
    
     }
 
