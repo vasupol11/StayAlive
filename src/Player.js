@@ -8,7 +8,6 @@ var Player = cc.Sprite.extend({
         this.isRight = false;
         this.isLeft = false;
         this.isDown = false;
-        this.playermove = 3;
         this.safeZone = false;
         this.safenum = 0;
 
@@ -81,7 +80,7 @@ var Player = cc.Sprite.extend({
         var pos = this.getPosition();
         var nextPos = pos;
         if (this.isUp ){
-            nextPos = cc.p( pos.x, pos.y + 3);
+            nextPos = cc.p( pos.x, pos.y + Velocity);
             if (  !this.isBlocksCloseTo(nextPos)) {
                 this.setPosition( nextPos );
             }
@@ -91,7 +90,7 @@ var Player = cc.Sprite.extend({
         }
         
         else if (this.isRight ){
-            nextPos = cc.p( pos.x + 3, pos.y );
+            nextPos = cc.p( pos.x + Velocity, pos.y );
             if ( !this.isBlocksCloseTo(nextPos)  ) {
                 this.setPosition( nextPos );
             }
@@ -102,7 +101,7 @@ var Player = cc.Sprite.extend({
         }
         
         else if ( this.isDown ){
-            nextPos = cc.p ( pos.x, pos.y -3 );
+            nextPos = cc.p ( pos.x, pos.y - Velocity );
             if ( !this.isBlocksCloseTo(nextPos) ) {
                 this.setPosition( nextPos );
             }
@@ -112,7 +111,7 @@ var Player = cc.Sprite.extend({
         }
         
         else if ( this.isLeft ){
-            nextPos = cc.p (pos.x - 3, pos.y );
+            nextPos = cc.p (pos.x - Velocity, pos.y );
             if (  !this.isBlocksCloseTo(nextPos) ) {
                 this.setPosition( nextPos );
             }
@@ -134,7 +133,7 @@ var Player = cc.Sprite.extend({
 });
 
 
-
+Velocity = 3;
 Player.DIR = {
     UP: 1,
     RIGHT: 2,

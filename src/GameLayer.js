@@ -93,6 +93,7 @@ var GameLayer = cc.LayerColor.extend({
     
     onKeyUp: function(e){
       
+        
         if (e == cc.KEY.up)
             this.player.switchDirectionRelease(1);
         else if (e == cc.KEY.right)
@@ -101,6 +102,7 @@ var GameLayer = cc.LayerColor.extend({
             this.player.switchDirectionRelease(4);
         else if (e == cc.KEY.left)
             this.player.switchDirectionRelease(3);
+        
    
     },
 
@@ -109,7 +111,7 @@ var GameLayer = cc.LayerColor.extend({
     },
 
     fadeInPlayer: function(){
-
+        this.player.runAction(cc.FadeIn.create(0.2));
     },
 
     increaseScore: function(){
@@ -123,10 +125,20 @@ var GameLayer = cc.LayerColor.extend({
     },
 
     hitObstacle: function(obj){
-        if (this.player.closeTo(obj)){
-            this.fadeOutPlayer();
+        if (this.isDead == false){
+            if (this.player.closeTo(obj)){
+                this.isDead = true;
+                this.fadeOutPlayer(); 
+            }
+        }  
+        else if (this.isDead == true && this.player.getOpacity() == 50){
+            this.increaseScore();
             this.repositionPlayer();
+            this.player.setOpacity(255);
+            this.isDead = false;
         }
+
+        
     },
 
     repositionPlayer: function(){
@@ -141,11 +153,6 @@ var GameLayer = cc.LayerColor.extend({
         }
 
         this.hitObstacle(this.obstacle);
-        
-        
-        // if (this.player.closeTo(this.obstacle)){
-        //     this.rebirthPlayer();
-        // }
    
     }
 
