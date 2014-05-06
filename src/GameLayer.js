@@ -1,5 +1,8 @@
 var GameLayer = cc.LayerColor.extend({
     init: function() {
+
+        this.isDead = false;
+        this.score = 0;  
         
         this._super( new cc.Color4B( 127, 127, 127, 255 ) );
         this.setPosition( new cc.Point( 0, 0 ) );
@@ -9,7 +12,7 @@ var GameLayer = cc.LayerColor.extend({
         this.addCoin();
         this.addObstacle();
         this.addPlayer();
-     
+        this.addScore();     
         
         this.scheduleUpdate();
         this.setKeyboardEnabled( true );
@@ -62,6 +65,15 @@ var GameLayer = cc.LayerColor.extend({
 
     },
 
+    addScore: function(){
+
+        this.scoreLabel = cc.LabelTTF.create( '0', 'Arial', 40 );
+        this.scoreLabel.setPosition( new cc.Point( 750, 550 ) );
+        this.addChild( this.scoreLabel );
+        this.scoreLabel.setString( this.score );
+    
+    },
+
     onKeyDown: function(e){
         
         if (e == cc.KEY.up)
@@ -75,7 +87,7 @@ var GameLayer = cc.LayerColor.extend({
    
     },
     
-    onKeyUp: function(e ){
+    onKeyUp: function(e){
       
         if (e == cc.KEY.up)
             this.player.switchDirectionRelease(1);
@@ -97,15 +109,10 @@ var GameLayer = cc.LayerColor.extend({
             this.removeChild(this.coin2);
         }
         if (this.player.closeTo(this.obstacle)){
+            this.player.runAction(cc.FadeOut.create(1.0,50));
             this.player.setPosition(this.player.playerPosition);
-
         }
-
-
-
-
-        
-    
+   
     }
 
 });
