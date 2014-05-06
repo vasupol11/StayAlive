@@ -110,16 +110,13 @@ var GameLayer = cc.LayerColor.extend({
         this.player.runAction(cc.FadeTo.create(0.2,50));         
     },
 
-    fadeInPlayer: function(){
-        this.player.runAction(cc.FadeIn.create(0.2));
-    },
-
     increaseScore: function(){
         this.scoreLabel.setString( this.score += 1 );
     },
 
     collectCoin: function( obj ){
         if (obj.closeTo(this.player)){
+             console.log(this.player.getOpacity());
             this.removeChild(obj);
         }
     },
@@ -128,13 +125,15 @@ var GameLayer = cc.LayerColor.extend({
         if (this.isDead == false){
             if (this.player.closeTo(obj)){
                 this.isDead = true;
-                this.fadeOutPlayer(); 
+                this.fadeOutPlayer();
+                this.player.Velocity = 0;
             }
         }  
         else if (this.isDead == true && this.player.getOpacity() == 50){
             this.increaseScore();
             this.repositionPlayer();
             this.player.setOpacity(255);
+            this.player.Velocity = 3;
             this.isDead = false;
         }
 

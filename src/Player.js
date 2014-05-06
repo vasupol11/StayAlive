@@ -10,6 +10,7 @@ var Player = cc.Sprite.extend({
         this.isDown = false;
         this.safeZone = false;
         this.safenum = 0;
+        this.Velocity = 3;
 
         this.game = game;
         this.playerPosition = new cc.Point( 100, 280 );
@@ -20,19 +21,15 @@ var Player = cc.Sprite.extend({
     switchDirection: function(direction) {
         if ( direction == 1 ) {
             this.isUp = true;
-            //this.setRotation( 0 );
         }
         else if( direction == 2 ){
             this.isRight = true;
-            //this.setRotation( 90 );
         }
         else if( direction == 4 ){
             this.isDown = true;
-            //this.setRotation( 180 );
         }
         else if( direction == 3 ){
             this.isLeft = true;
-            //this.setRotation( 270 );
 }
 
     },
@@ -75,51 +72,54 @@ var Player = cc.Sprite.extend({
     
     },
 
-    update: function( dt ) {   
-        
+    move: function (dt) {
         var pos = this.getPosition();
         var nextPos = pos;
         if (this.isUp ){
-            nextPos = cc.p( pos.x, pos.y + Velocity);
+            nextPos = cc.p( pos.x, pos.y + this.Velocity);
             if (  !this.isBlocksCloseTo(nextPos)) {
                 this.setPosition( nextPos );
             }
-            if ( this.isAtGreenBlock( nextPos)) {
+            else if( this.isAtGreenBlock( nextPos)) {
                 this.playerPosition = this.game.maze.greenBlocks[this.safenum].getPosition();
             }
         }
         
         else if (this.isRight ){
-            nextPos = cc.p( pos.x + Velocity, pos.y );
+            nextPos = cc.p( pos.x + this.Velocity, pos.y );
             if ( !this.isBlocksCloseTo(nextPos)  ) {
                 this.setPosition( nextPos );
             }
-            if ( this.isAtGreenBlock(nextPos)) {
+            else if( this.isAtGreenBlock(nextPos)) {
                 this.playerPosition = this.game.maze.greenBlocks[this.safenum].getPosition();
 
             }
         }
         
         else if ( this.isDown ){
-            nextPos = cc.p ( pos.x, pos.y - Velocity );
+            nextPos = cc.p ( pos.x, pos.y - this.Velocity );
             if ( !this.isBlocksCloseTo(nextPos) ) {
                 this.setPosition( nextPos );
             }
-            if ( this.isAtGreenBlock(nextPos)) {
+            else if( this.isAtGreenBlock(nextPos)) {
                 this.playerPosition = this.game.maze.greenBlocks[this.safenum].getPosition();
             }
         }
         
         else if ( this.isLeft ){
-            nextPos = cc.p (pos.x - Velocity, pos.y );
+            nextPos = cc.p (pos.x - this.Velocity, pos.y );
             if (  !this.isBlocksCloseTo(nextPos) ) {
                 this.setPosition( nextPos );
             }
-            if ( this.isAtGreenBlock(nextPos)) {
+            else if( this.isAtGreenBlock(nextPos)) {
                 this.playerPosition = this.game.maze.greenBlocks[this.safenum].getPosition();
             }
         
         }
+    },
+    update: function( dt ) {   
+        
+        this.move(dt);
 
     },
     
@@ -133,7 +133,7 @@ var Player = cc.Sprite.extend({
 });
 
 
-Velocity = 3;
+
 Player.DIR = {
     UP: 1,
     RIGHT: 2,
