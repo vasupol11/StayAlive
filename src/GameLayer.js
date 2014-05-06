@@ -3,7 +3,7 @@ var GameLayer = cc.LayerColor.extend({
 
         this.isDead = false;
         this.score = 0;  
-        
+        this.coins = [];
         this._super( new cc.Color4B( 127, 127, 127, 255 ) );
         this.setPosition( new cc.Point( 0, 0 ) );
         
@@ -37,6 +37,7 @@ var GameLayer = cc.LayerColor.extend({
 
     addCoin: function(){
 
+
         this.coin = new Coin();
         this.coin.setPosition(200,300);
         this.coin.setScale(1.5);
@@ -46,6 +47,10 @@ var GameLayer = cc.LayerColor.extend({
         this.coin2.setPosition(300,300);
         this.coin2.setScale(1.5);
         this.addChild(this.coin2);
+
+        this.coins.push(this.coin);
+        this.coins.push(this.coin2);
+
     
     },
 
@@ -70,7 +75,7 @@ var GameLayer = cc.LayerColor.extend({
         this.scoreLabel = cc.LabelTTF.create( '0', 'Arial', 40 );
         this.scoreLabel.setPosition( new cc.Point( 750, 550 ) );
         this.addChild( this.scoreLabel );
-        this.scoreLabel.setString( this.score );
+        
     
     },
 
@@ -100,17 +105,29 @@ var GameLayer = cc.LayerColor.extend({
    
     },
 
+    rebirthPlayer: function(){
+        
+        this.player.runAction(cc.FadeTo.create(0.2,50));
+        this.scoreLabel.setString( this.score += 1 );
+               
+    },
+
+    collectCoin: function( obj ){
+        if (obj.closeTo(this.player)){
+            this.removeChild(obj);
+        }
+
+    },
+
     update: function(){
        
-        if (this.coin.closeTo(this.player)){
-            this.removeChild(this.coin);
+        
+        for(var i = 0; i < 2; i++){
+            this.collectCoin(this.coins[i]);
         }
-        if (this.coin2.closeTo(this.player)){
-            this.removeChild(this.coin2);
-        }
+        
         if (this.player.closeTo(this.obstacle)){
-            this.player.runAction(cc.FadeOut.create(1.0,50));
-            this.player.setPosition(this.player.playerPosition);
+            this.rebirthPlayer();
         }
    
     }
