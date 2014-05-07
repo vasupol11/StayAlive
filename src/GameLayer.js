@@ -4,7 +4,7 @@ var GameLayer = cc.LayerColor.extend({
         this.isDead = false;
         this.score = 0;  
         this.coins = [];
-        this.obstales = [];
+        this.obstacles = [];
         this._super( new cc.Color4B( 127, 127, 127, 255 ) );
         this.setPosition( new cc.Point( 0, 0 ) );
         
@@ -37,7 +37,6 @@ var GameLayer = cc.LayerColor.extend({
 
     addCoin: function(){
 
-
         this.coin = new Coin();
         this.coin.setPosition(200,300);
         this.coin.setScale(1.5);
@@ -50,7 +49,6 @@ var GameLayer = cc.LayerColor.extend({
 
         this.coins.push(this.coin);
         this.coins.push(this.coin2);
-
     
     },
 
@@ -60,6 +58,21 @@ var GameLayer = cc.LayerColor.extend({
         this.obstacle.setPosition(300,380);
         this.addChild( this.obstacle);
         this.obstacles.push(this.obstacle);
+
+        this.obstacle3 = new Obstacle( this.maze );
+        this.obstacle3.setPosition(200,320);
+        this.addChild( this.obstacle3 );
+        this.obstacles.push(this.obstacle3);
+
+        this.obstacle4 = new Obstacle( this.maze );
+        this.obstacle4.setPosition(200,260);
+        this.addChild( this.obstacle4 );
+        this.obstacles.push(this.obstacle4);
+
+        this.obstacle5 = new Obstacle( this.maze );
+        this.obstacle5.setPosition(200,200);
+        this.addChild( this.obstacle5 );
+        this.obstacles.push(this.obstacle5);
 
     },
     
@@ -145,8 +158,6 @@ var GameLayer = cc.LayerColor.extend({
             this.player.Velocity = 3;
             this.isDead = false;
         }
-
-
         
     },
 
@@ -157,10 +168,13 @@ var GameLayer = cc.LayerColor.extend({
     update: function(){
        
         
-        for(var i = 0; i < 2; i++){
+        for(var i = 0; i < this.coins.length; i++){
             this.collectCoin(this.coins[i]);
         }
-        this.hitObstacle(this.obstacle);
+        for(var i = 0; i < this.obstacles.length; i++){
+            this.hitObstacle(this.obstacles[i]);
+        }
+        
    
     }
 

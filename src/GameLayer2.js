@@ -157,12 +157,12 @@ var GameLayer2 = cc.LayerColor.extend({
 
 });
 
-var StartScene = cc.Scene.extend({
+var StartScene2 = cc.Scene.extend({
     
     onEnter: function() {
         
         this._super();
-        var layer = new GameLayer();
+        var layer = new GameLayer2();
         layer.init();
         this.addChild( layer );
     

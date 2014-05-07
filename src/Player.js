@@ -72,6 +72,17 @@ var Player = cc.Sprite.extend({
     
     },
 
+    isAtPinkBlock: function(nextPos){
+
+        for( var i =0 ; i < this.game.maze.pinkBlocks.length ; i++ ) {
+            if( this.game.maze.pinkBlocks[i].closeTo( nextPos ) == true) {
+                return true;
+            }
+        }
+        return false;
+
+    },
+
     move: function (dt) {
         var pos = this.getPosition();
         var nextPos = pos;
@@ -82,6 +93,10 @@ var Player = cc.Sprite.extend({
             }
             else if( this.isAtGreenBlock( nextPos)) {
                 this.playerPosition = this.game.maze.greenBlocks[this.safenum].getPosition();
+            }
+            else if( this.isAtPinkBlock(nextPos)){
+                console.log("pink");
+                 cc.Director.getInstance().replaceScene( new StartScene2());
             }
         }
         
@@ -94,6 +109,10 @@ var Player = cc.Sprite.extend({
                 this.playerPosition = this.game.maze.greenBlocks[this.safenum].getPosition();
 
             }
+            else if( this.isAtPinkBlock(nextPos)){
+                console.log("pink");
+                cc.Director.replaceScene( new StartScene2());
+            }
         }
         
         else if ( this.isDown ){
@@ -104,6 +123,10 @@ var Player = cc.Sprite.extend({
             else if( this.isAtGreenBlock(nextPos)) {
                 this.playerPosition = this.game.maze.greenBlocks[this.safenum].getPosition();
             }
+            else if( this.isAtPinkBlock(nextPos)){
+                console.log("pink");
+                cc.Director.replaceScene( new StartScene2());
+            }
         }
         
         else if ( this.isLeft ){
@@ -113,6 +136,10 @@ var Player = cc.Sprite.extend({
             }
             else if( this.isAtGreenBlock(nextPos)) {
                 this.playerPosition = this.game.maze.greenBlocks[this.safenum].getPosition();
+            }
+            else if( this.isAtPinkBlock(nextPos)){
+                console.log("pink");
+                 cc.Director.replaceScene( new StartScene2());
             }
         
         }
