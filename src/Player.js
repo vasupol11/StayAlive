@@ -13,7 +13,7 @@ var Player = cc.Sprite.extend({
         this.Velocity = 3;
 
         this.game = game;
-        this.playerPosition = new cc.Point( 100, 280 );
+        this.playerPosition = this.game.maze.greenBlocks[4].getPosition();
 
         this.scheduleUpdate();
     },

@@ -1,19 +1,19 @@
-var GameLayer = cc.LayerColor.extend({
+var GameLayer2 = cc.LayerColor.extend({
     init: function() {
 
         this.isDead = false;
         this.score = 0;  
         this.coins = [];
-        this.obstales = [];
         this._super( new cc.Color4B( 127, 127, 127, 255 ) );
         this.setPosition( new cc.Point( 0, 0 ) );
         
         this.addBackground();
         this.addMaze();       
-        this.addPlayer();
         this.addCoin();
         this.addObstacle();
+        this.addPlayer();
         this.addScore();     
+        
         this.scheduleUpdate();
         this.setKeyboardEnabled( true );
         
@@ -59,14 +59,13 @@ var GameLayer = cc.LayerColor.extend({
         this.obstacle = new Obstacle( this.maze );
         this.obstacle.setPosition(300,380);
         this.addChild( this.obstacle);
-        this.obstacles.push(this.obstacle);
 
     },
     
     addPlayer: function(){
 
         this.player = new Player(this);
-        this.player.setPosition(new cc.Point(80,280));
+        this.player.setPosition(this.player.playerPosition);
         this.addChild( this.player );
 
     },
@@ -117,15 +116,9 @@ var GameLayer = cc.LayerColor.extend({
 
     collectCoin: function( obj ){
         if (obj.closeTo(this.player)){
+             console.log(this.player.getOpacity());
             this.removeChild(obj);
         }
-    },
-
-    removeCoin: function( ){
-        for(var i = 0; i < this.coins.length; i++){
-            this.removeChild(this.coins[i]);
-        }
-        this.coins = [];
     },
 
     hitObstacle: function(obj){
@@ -137,15 +130,12 @@ var GameLayer = cc.LayerColor.extend({
             }
         }  
         else if (this.isDead == true && this.player.getOpacity() == 50){
-            this.removeCoin();
-            this.addCoin();
             this.increaseScore();
             this.repositionPlayer();
             this.player.setOpacity(255);
             this.player.Velocity = 3;
             this.isDead = false;
         }
-
 
         
     },
@@ -160,6 +150,7 @@ var GameLayer = cc.LayerColor.extend({
         for(var i = 0; i < 2; i++){
             this.collectCoin(this.coins[i]);
         }
+
         this.hitObstacle(this.obstacle);
    
     }
