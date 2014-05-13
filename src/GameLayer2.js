@@ -6,25 +6,22 @@ var GameLayer2 = cc.LayerColor.extend({
         this.obstacles = [];
         this._super( new cc.Color4B( 127, 127, 127, 255 ) );
         this.setPosition( new cc.Point( 0, 0 ) );
-        this.coinsAmountOnScreen = this.coins.length;
         this.sceneNumber = 2;
         
-        this.addBackground();
+        this.addBackground(2);
         this.addMaze();       
         this.addCoin();
-        this.addObstacle();
+        this.addObstacle(2);
         this.addPlayer();
         this.addScore();     
-        
         this.scheduleUpdate();
         this.setKeyboardEnabled( true );
         
     },
 
-    addBackground: function(){
+    addBackground: function(level){
 
-        this.background1 = new Background();
-        this.background1.setPosition(100,200);
+        this.background1 = new Background(level);
         this.addChild(this.background1);
 
     },
@@ -38,66 +35,167 @@ var GameLayer2 = cc.LayerColor.extend({
     },
 
     addCoin: function(){
-
-
-        this.coin = new Coin();
-        this.coin.setPosition(160,300);
-        this.coin.setScale(1.5);
-        this.addChild(this.coin);
-
-        this.coin2 = new Coin();
-        this.coin2.setPosition(145,300);
-        this.coin2.setScale(1.5);
-        this.addChild(this.coin2);
-
-        this.coins.push(this.coin);
-        this.coins.push(this.coin2);
-
-    
     },
 
     inputObstacleDetail: function(name){
         
     },
 
-    addObstacle: function(){
-
-        this.obstacle = new Obstacle( this.maze );
-        this.obstacle.setPosition(300,360);        
-        this.addChild(this.obstacle);
-        this.obstacle.velocity = 0.8;
-        this.obstacle.topBoundary = 420;
-        this.obstacle.bottomBoundary = 360;
-        this.obstacle.directionUpDown = true;
-        this.obstacles.push(this.obstacle);
-
-        this.obstacle2 = new Obstacle( this.maze );
-        this.obstacle2.setPosition(320,360);        
-        this.addChild(this.obstacle2);
-        this.obstacle2.velocity = 0.8;
-        this.obstacle2.topBoundary = 420;
-        this.obstacle2.bottomBoundary = 360;
-        this.obstacle2.directionUpDown = true;
+    addObstacle: function(level){
+//////left
+        this.obstacle2 = new Obstacle( level );
+        this.obstacle2.setPosition(320,370);
+        this.obstacle2.directionLeftRight = true;
+        this.obstacle2.velocity = 2;
+        this.obstacle2.leftBoundary = 250;
+        this.obstacle2.rightBoundary = 320;
+        this.addChild( this.obstacle2 );
         this.obstacles.push(this.obstacle2);
 
-        this.obstacle3 = new Obstacle( this.maze );
-        this.obstacle3.setPosition(200,320);
+        this.obstacle3 = new Obstacle( level );
+        this.obstacle3.setPosition(250,330);
         this.obstacle3.directionLeftRight = true;
+        this.obstacle3.velocity = 2;
+        this.obstacle3.leftBoundary = 250;
+        this.obstacle3.rightBoundary = 320;
         this.addChild( this.obstacle3 );
         this.obstacles.push(this.obstacle3);
 
-        this.obstacle4 = new Obstacle( this.maze );
-        this.obstacle4.setPosition(200,260);
+        this.obstacle4 = new Obstacle( level );
+        this.obstacle4.setPosition(320,290);
         this.obstacle4.directionLeftRight = true;
+        this.obstacle4.velocity = 2;
+        this.obstacle4.leftBoundary = 250;
+        this.obstacle4.rightBoundary = 320;
         this.addChild( this.obstacle4 );
         this.obstacles.push(this.obstacle4);
 
-        this.obstacle5 = new Obstacle( this.maze );
-        this.obstacle5.setPosition(200,200);
+        this.obstacle5 = new Obstacle( level );
+        this.obstacle5.setPosition(250,250);
         this.obstacle5.directionLeftRight = true;
+        this.obstacle5.velocity = 2;
+        this.obstacle5.leftBoundary = 250;
+        this.obstacle5.rightBoundary = 320;
         this.addChild( this.obstacle5 );
         this.obstacles.push(this.obstacle5);
 
+        this.obstacle5 = new Obstacle( level );
+        this.obstacle5.setPosition(140,250);
+        this.obstacle5.directionLeftRight = true;
+        this.obstacle5.velocity = 2;
+        this.obstacle5.leftBoundary = 140;
+        this.obstacle5.rightBoundary = 210;
+        this.addChild( this.obstacle5 );
+        this.obstacles.push(this.obstacle5);
+
+        this.obstacle6 = new Obstacle( level );
+        this.obstacle6.setPosition(210,210);
+        this.obstacle6.directionLeftRight = true;
+        this.obstacle6.velocity = 2;
+        this.obstacle6.leftBoundary = 140;
+        this.obstacle6.rightBoundary = 210;
+        this.addChild( this.obstacle6 );
+        this.obstacles.push(this.obstacle6);
+
+        this.obstacle7 = new Obstacle( level );
+        this.obstacle7.setPosition(140,170);
+        this.obstacle7.directionLeftRight = true;
+        this.obstacle7.velocity = 2;
+        this.obstacle7.leftBoundary = 140;
+        this.obstacle7.rightBoundary = 210;
+        this.addChild( this.obstacle7 );
+        this.obstacles.push(this.obstacle7);
+///// right
+        this.obstacle = new Obstacle( level );
+        this.obstacle.setPosition(590,170);
+        this.obstacle.directionLeftRight = true;
+        this.obstacle.velocity = 2;
+        this.obstacle.leftBoundary = 590;
+        this.obstacle.rightBoundary = 660;
+        this.addChild( this.obstacle );
+        this.obstacles.push(this.obstacle);
+
+        this.obstacle = new Obstacle( level );
+        this.obstacle.setPosition(660,210);
+        this.obstacle.directionLeftRight = true;
+        this.obstacle.velocity = 2;
+        this.obstacle.leftBoundary = 590;
+        this.obstacle.rightBoundary = 660;
+        this.addChild( this.obstacle );
+        this.obstacles.push(this.obstacle);
+
+        this.obstacle = new Obstacle( level );
+        this.obstacle.setPosition(590,250);
+        this.obstacle.directionLeftRight = true;
+        this.obstacle.velocity = 2;
+        this.obstacle.leftBoundary = 590;
+        this.obstacle.rightBoundary = 660;
+        this.addChild( this.obstacle );
+        this.obstacles.push(this.obstacle);
+
+        this.obstacle = new Obstacle( level );
+        this.obstacle.setPosition(500,250);
+        this.obstacle.directionLeftRight = true;
+        this.obstacle.velocity = 2;
+        this.obstacle.leftBoundary = 500;
+        this.obstacle.rightBoundary = 570;
+        this.addChild( this.obstacle );
+        this.obstacles.push(this.obstacle);
+
+        this.obstacle = new Obstacle( level );
+        this.obstacle.setPosition(570,290);
+        this.obstacle.directionLeftRight = true;
+        this.obstacle.velocity = 2;
+        this.obstacle.leftBoundary = 500;
+        this.obstacle.rightBoundary = 570;
+        this.addChild( this.obstacle );
+        this.obstacles.push(this.obstacle);
+
+        this.obstacle = new Obstacle( level );
+        this.obstacle.setPosition(500,330);
+        this.obstacle.directionLeftRight = true;
+        this.obstacle.velocity = 2;
+        this.obstacle.leftBoundary = 500;
+        this.obstacle.rightBoundary = 570;
+        this.addChild( this.obstacle );
+        this.obstacles.push(this.obstacle);
+
+        this.obstacle = new Obstacle( level );
+        this.obstacle.setPosition(570,370);
+        this.obstacle.directionLeftRight = true;
+        this.obstacle.velocity = 2;
+        this.obstacle.leftBoundary = 500;
+        this.obstacle.rightBoundary = 570;
+        this.addChild( this.obstacle );
+        this.obstacles.push(this.obstacle);
+////buttom
+        
+        this.obstacle = new Obstacle( level );
+        this.obstacle.setPosition(410,110);
+        this.obstacle.directionUpDown = true;
+        this.obstacle.velocity = 2;
+        this.obstacle.topBoundary = 180;
+        this.obstacle.bottomBoundary = 110;
+        this.addChild( this.obstacle );
+        this.obstacles.push(this.obstacle);
+
+        this.obstacle = new Obstacle( level );
+        this.obstacle.setPosition(450,180);
+        this.obstacle.directionUpDown = true;
+        this.obstacle.velocity = 2;
+        this.obstacle.topBoundary = 180;
+        this.obstacle.bottomBoundary = 110;
+        this.addChild( this.obstacle );
+        this.obstacles.push(this.obstacle);
+
+        this.obstacle = new Obstacle( level );
+        this.obstacle.setPosition(370,180);
+        this.obstacle.directionUpDown = true;
+        this.obstacle.velocity = 2;
+        this.obstacle.topBoundary = 180;
+        this.obstacle.bottomBoundary = 110;
+        this.addChild( this.obstacle );
+        this.obstacles.push(this.obstacle);
     },
     
     addPlayer: function(){
@@ -110,7 +208,7 @@ var GameLayer2 = cc.LayerColor.extend({
 
     addScore: function(){
 
-        this.scoreLabel = cc.LabelTTF.create( score, 'Arial', 40 );
+        this.scoreLabel = cc.LabelTTF.create( '0', 'Arial', 40 );
         this.scoreLabel.setPosition( new cc.Point( 750, 550 ) );
         this.addChild( this.scoreLabel );  
     
@@ -152,10 +250,10 @@ var GameLayer2 = cc.LayerColor.extend({
         this.scoreLabel.setString( score += 1 );
     },
 
-    collectCoin: function( obj ){
-        if (obj.closeTo(this.player)){
-            this.removeChild(obj);
-            this.coinsAmountOnScreen -= 1;
+    collectCoin: function( coin, coinPos ){
+        if (coin.closeTo(this.player)){
+            this.removeChild(coin);
+            this.coins.splice(coinPos, 1);
         }
     },
 
@@ -182,26 +280,22 @@ var GameLayer2 = cc.LayerColor.extend({
             this.player.setOpacity(255);
             this.player.Velocity = 3;
             this.isDead = false;
-        }
-
-        
+        }    
     },
 
     repositionPlayer: function(){
         this.player.setPosition(this.player.playerPosition);
     },
 
-    update: function(){
-       
+    update: function(){  
         
-        for(var i = 0; i < 2; i++){
-            this.collectCoin(this.coins[i]);
+        for(var i = 0; i < this.coins.length; i++){
+            this.collectCoin(this.coins[i],i);
         }
 
          for(var i = 0; i < this.obstacles.length; i++){
             this.hitObstacle(this.obstacles[i]);
         }
-   
     }
 
 });
@@ -214,8 +308,7 @@ var StartScene2 = cc.Scene.extend({
         var layer = new GameLayer2();
         layer.init();
         this.addChild( layer );
-    
-    }
 
+    }
 });
 

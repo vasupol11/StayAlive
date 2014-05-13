@@ -88,8 +88,8 @@ var Player = cc.Sprite.extend({
             case 1:
                 cc.Director.getInstance().replaceScene( new StartScene2());
                 break;
-            // case 2:
-            //     cc.Director.getInstance().replaceScene( new StartScene3());
+            case 2:
+                cc.Director.getInstance().replaceScene( new StartScene3());
         }
     },
 
@@ -104,7 +104,7 @@ var Player = cc.Sprite.extend({
             else if( this.isAtGreenBlock( nextPos)) {
                 this.playerPosition = this.game.maze.greenBlocks[this.safenum].getPosition();
             }
-            else if( this.game.coinsAmountOnScreen < 0){
+            else if( this.game.coins.length == 0){
                 if( this.isAtPinkBlock(nextPos)){
                     this.switchScene();
                 }
@@ -120,7 +120,7 @@ var Player = cc.Sprite.extend({
                 this.playerPosition = this.game.maze.greenBlocks[this.safenum].getPosition();
 
             }
-            else if( this.game.coinsAmountOnScreen < 0){
+            else if( this.game.coins.length == 0){
                 if( this.isAtPinkBlock(nextPos)){
                     this.switchScene();
                 }
@@ -135,7 +135,7 @@ var Player = cc.Sprite.extend({
             else if( this.isAtGreenBlock(nextPos)) {
                 this.playerPosition = this.game.maze.greenBlocks[this.safenum].getPosition();
             }
-            else if( this.game.coinsAmountOnScreen < 0){
+            else if( this.game.coins.length == 0){
                 if( this.isAtPinkBlock(nextPos)){
                     this.switchScene();
                 }    
@@ -150,7 +150,7 @@ var Player = cc.Sprite.extend({
             else if( this.isAtGreenBlock(nextPos)) {
                 this.playerPosition = this.game.maze.greenBlocks[this.safenum].getPosition();
             }
-            else if(this.game.coinsAmountOnScreen < 0){
+            else if(this.game.coins.length == 0){
                if( this.isAtPinkBlock(nextPos)){
                     this.switchScene();
                 }    

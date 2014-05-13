@@ -22,7 +22,9 @@
             'src/Block.js',
             'src/GreenBlock.js',
             'src/PinkBlock.js',
-            'src/GameLayer2.js'
+            'src/GameLayer2.js',
+            'src/GameLayer3.js'
+
             
         ]
     };

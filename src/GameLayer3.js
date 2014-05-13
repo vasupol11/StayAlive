@@ -7,10 +7,8 @@ var GameLayer3 = cc.LayerColor.extend({
         this.obstacles = [];
         this._super( new cc.Color4B( 127, 127, 127, 255 ) );
         this.setPosition( new cc.Point( 0, 0 ) );
-        this.coinsAmountOnScreen = this.coins.length;
         this.sceneNumber = 1;
 
-        console.log(score);
         this.addBackground();
         this.addMaze();       
         this.addPlayer();
@@ -32,7 +30,7 @@ var GameLayer3 = cc.LayerColor.extend({
 
     addMaze: function(){
 
-        this.maze = new Map1(1);
+        this.maze = new Map1(3);
         this.maze.setPosition( cc.p( 0, 0 ) );
         this.addChild( this.maze );
     
@@ -132,10 +130,10 @@ var GameLayer3 = cc.LayerColor.extend({
         this.scoreLabel.setString( score += 1 );
     },
 
-    collectCoin: function( coin ){
+    collectCoin: function( coin, coinPos){
         if (coin.closeTo(this.player)){
             this.removeChild(coin);
-            this.coinsAmountOnScreen -= 1;
+            this.coins.splice(coinPos,1);
         }
     },
 
@@ -179,18 +177,16 @@ var GameLayer3 = cc.LayerColor.extend({
         for(var i = 0; i < this.obstacles.length; i++){
             this.hitObstacle(this.obstacles[i]);
         }
-        
-   
     }
 
 });
 
-var StartScene = cc.Scene.extend({
+var StartScene3 = cc.Scene.extend({
     
     onEnter: function() {
         
         this._super();
-        var layer = new GameLayer();
+        var layer = new GameLayer3();
         layer.init();
         this.addChild( layer );
     

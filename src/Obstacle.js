@@ -1,7 +1,7 @@
 var Obstacle = cc.Sprite.extend({
-    ctor: function( ) {
+    ctor: function( level ) {
         this._super();
-        this.initWithFile( 'Images/obstacle_red.png' ); 
+        this.pickImages( level );
         this.scheduleUpdate(); 
         this.velocity = 10;
         this.direction = Obstacle.DIR.STOP;
@@ -13,6 +13,17 @@ var Obstacle = cc.Sprite.extend({
         this.bottomBoundary = 350;
     },
 
+    pickImages: function( level ){
+        switch (level){
+            case 1:
+                this.initWithFile( 'Images/obstacle_red.png' ); 
+                break;
+            case 2:
+                this.initWithFile( 'Images/obstacle_blue.png' );
+                break;
+        }
+        
+    },
     move: function( ){
     	var pos = this.getPosition();
         if (this.direction == Obstacle.DIR.STOP){

@@ -1,31 +1,28 @@
 var GameLayer = cc.LayerColor.extend({
     init: function() {
 
-        this.isDead = false;
-        this.score = 0;  
+        this.isDead = false;  
         this.coins = [];
         this.obstacles = [];
         this._super( new cc.Color4B( 127, 127, 127, 255 ) );
         this.setPosition( new cc.Point( 0, 0 ) );
-        this.coinsAmountOnScreen = this.coins.length;
         this.sceneNumber = 1;
 
-        console.log(score);
-        this.addBackground();
+
+        this.addBackground(1);
         this.addMaze();       
         this.addPlayer();
         this.addCoin();
-        this.addObstacle();
+        this.addObstacle(1);
         this.addScore();     
         this.scheduleUpdate();
         this.setKeyboardEnabled( true );
         
     },
 
-    addBackground: function(){
+    addBackground: function(level){
 
-        this.background1 = new Background();
-        this.background1.setPosition(100,200);
+        this.background1 = new Background(level);
         this.addChild(this.background1);
 
     },
@@ -41,44 +38,70 @@ var GameLayer = cc.LayerColor.extend({
     addCoin: function(){
 
         this.coin = new Coin();
-        this.coin.setPosition(200,300);
+        this.coin.setPosition(450,420);
         this.coin.setScale(1.5);
         this.addChild(this.coin);
 
         this.coin2 = new Coin();
-        this.coin2.setPosition(300,300);
+        this.coin2.setPosition(450,240);
         this.coin2.setScale(1.5);
         this.addChild(this.coin2);
 
+        this.coin3 = new Coin();
+        this.coin3.setPosition(705,420);
+        this.coin3.setScale(1.5);
+        this.addChild(this.coin3);
+
         this.coins.push(this.coin);
         this.coins.push(this.coin2);
-    
+        this.coins.push(this.coin3);
     },
 
-    addObstacle: function(){
+    addObstacle: function(level){
 
-        this.obstacle = new Obstacle( this.maze );
-        this.obstacle.setPosition(300,380);
+        this.obstacle = new Obstacle(level);
+        this.obstacle.setPosition(705,430);
         this.obstacle.directionLeftRight = true;
         this.addChild( this.obstacle);
+        this.obstacle.velocity = 4.5;
+        this.obstacle.leftBoundary = 450;
+        this.obstacle.rightBoundary = 705;
         this.obstacles.push(this.obstacle);
 
-        this.obstacle3 = new Obstacle( this.maze );
-        this.obstacle3.setPosition(200,320);
+        this.obstacle2 = new Obstacle(level);
+        this.obstacle2.setPosition(450,390);
+        this.obstacle2.directionLeftRight = true;
+        this.addChild( this.obstacle2);
+        this.obstacle2.velocity = 4.5;
+        this.obstacle2.leftBoundary = 450;
+        this.obstacle2.rightBoundary = 705;
+        this.obstacles.push(this.obstacle2);
+
+        this.obstacle3 = new Obstacle(level);
+        this.obstacle3.setPosition(705,340);
         this.obstacle3.directionLeftRight = true;
         this.addChild( this.obstacle3 );
+        this.obstacle3.velocity = 5;
+        this.obstacle3.leftBoundary = 450;
+        this.obstacle3.rightBoundary = 705;
         this.obstacles.push(this.obstacle3);
 
-        this.obstacle4 = new Obstacle( this.maze );
-        this.obstacle4.setPosition(200,260);
+        this.obstacle4 = new Obstacle(level);
+        this.obstacle4.setPosition(450,290);
         this.obstacle4.directionLeftRight = true;
         this.addChild( this.obstacle4 );
+        this.obstacle4.velocity = 4.5;
+        this.obstacle4.leftBoundary = 450;
+        this.obstacle4.rightBoundary = 705;
         this.obstacles.push(this.obstacle4);
 
-        this.obstacle5 = new Obstacle( this.maze );
-        this.obstacle5.setPosition(200,200);
+        this.obstacle5 = new Obstacle(level);
+        this.obstacle5.setPosition(705,240);
         this.obstacle5.directionLeftRight = true;
         this.addChild( this.obstacle5 );
+        this.obstacle5.velocity = 3.8;
+        this.obstacle5.leftBoundary = 450;
+        this.obstacle5.rightBoundary = 705;
         this.obstacles.push(this.obstacle5);
 
     },
@@ -132,10 +155,10 @@ var GameLayer = cc.LayerColor.extend({
         this.scoreLabel.setString( score += 1 );
     },
 
-    collectCoin: function( coin ){
+    collectCoin: function( coin, coinPos ){
         if (coin.closeTo(this.player)){
             this.removeChild(coin);
-            this.coinsAmountOnScreen -= 1;
+            this.coins.splice(coinPos, 1);
         }
     },
 
@@ -162,8 +185,7 @@ var GameLayer = cc.LayerColor.extend({
             this.player.setOpacity(255);
             this.player.Velocity = 3;
             this.isDead = false;
-        }
-        
+        }   
     },
 
     repositionPlayer: function(){
@@ -171,16 +193,13 @@ var GameLayer = cc.LayerColor.extend({
     },
 
     update: function(){
-       
         
         for(var i = 0; i < this.coins.length; i++){
-            this.collectCoin(this.coins[i]);
+            this.collectCoin(this.coins[i],i);
         }
         for(var i = 0; i < this.obstacles.length; i++){
             this.hitObstacle(this.obstacles[i]);
-        }
-        
-   
+        }          
     }
 
 });
