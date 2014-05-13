@@ -20,7 +20,9 @@
             'src/Map1.js',
             'src/Obstacle.js',
             'src/Block.js',
-            'src/GreenBlock.js'
+            'src/GreenBlock.js',
+            'src/PinkBlock.js',
+            'src/GameLayer2.js'
             
         ]
     };

@@ -11,10 +11,10 @@ var Player = cc.Sprite.extend({
         this.safeZone = false;
         this.safenum = 0;
         this.Velocity = 3;
-
+        
         this.game = game;
         this.playerPosition = this.game.maze.greenBlocks[4].getPosition();
-
+        this.setPosition(this.game.maze.greenBlocks[4].getPosition());
         this.scheduleUpdate();
     },
     
@@ -30,7 +30,7 @@ var Player = cc.Sprite.extend({
         }
         else if( direction == 3 ){
             this.isLeft = true;
-}
+    }
 
     },
     
@@ -83,6 +83,16 @@ var Player = cc.Sprite.extend({
 
     },
 
+    switchScene: function(){
+        switch (this.game.sceneNumber){
+            case 1:
+                cc.Director.getInstance().replaceScene( new StartScene2());
+                break;
+            // case 2:
+            //     cc.Director.getInstance().replaceScene( new StartScene3());
+        }
+    },
+
     move: function (dt) {
         var pos = this.getPosition();
         var nextPos = pos;
@@ -94,9 +104,10 @@ var Player = cc.Sprite.extend({
             else if( this.isAtGreenBlock( nextPos)) {
                 this.playerPosition = this.game.maze.greenBlocks[this.safenum].getPosition();
             }
-            else if( this.isAtPinkBlock(nextPos)){
-                console.log("pink");
-                 cc.Director.getInstance().replaceScene( new StartScene2());
+            else if( this.game.coinsAmountOnScreen < 0){
+                if( this.isAtPinkBlock(nextPos)){
+                    this.switchScene();
+                }
             }
         }
         
@@ -109,10 +120,11 @@ var Player = cc.Sprite.extend({
                 this.playerPosition = this.game.maze.greenBlocks[this.safenum].getPosition();
 
             }
-            else if( this.isAtPinkBlock(nextPos)){
-                console.log("pink");
-                cc.Director.replaceScene( new StartScene2());
-            }
+            else if( this.game.coinsAmountOnScreen < 0){
+                if( this.isAtPinkBlock(nextPos)){
+                    this.switchScene();
+                }
+            }        
         }
         
         else if ( this.isDown ){
@@ -123,9 +135,10 @@ var Player = cc.Sprite.extend({
             else if( this.isAtGreenBlock(nextPos)) {
                 this.playerPosition = this.game.maze.greenBlocks[this.safenum].getPosition();
             }
-            else if( this.isAtPinkBlock(nextPos)){
-                console.log("pink");
-                cc.Director.replaceScene( new StartScene2());
+            else if( this.game.coinsAmountOnScreen < 0){
+                if( this.isAtPinkBlock(nextPos)){
+                    this.switchScene();
+                }    
             }
         }
         
@@ -137,11 +150,11 @@ var Player = cc.Sprite.extend({
             else if( this.isAtGreenBlock(nextPos)) {
                 this.playerPosition = this.game.maze.greenBlocks[this.safenum].getPosition();
             }
-            else if( this.isAtPinkBlock(nextPos)){
-                console.log("pink");
-                 cc.Director.replaceScene( new StartScene2());
+            else if(this.game.coinsAmountOnScreen < 0){
+               if( this.isAtPinkBlock(nextPos)){
+                    this.switchScene();
+                }    
             }
-        
         }
     },
     update: function( dt ) {   

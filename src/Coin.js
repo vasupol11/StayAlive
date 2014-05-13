@@ -16,7 +16,6 @@ var Coin = cc.Sprite.extend({
     createAnimationAction: function() {
         var animation = new cc.Animation.create();
 	   this.addAnimationfiles(animation);
-	   console.log( animation.getDelayPerUnit() );
 	   animation.setDelayPerUnit( 0.2 );
 	   return cc.RepeatForever.create( cc.Animate.create( animation ) );
     },

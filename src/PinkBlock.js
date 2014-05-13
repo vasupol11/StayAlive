@@ -9,8 +9,8 @@ var PinkBlock = cc.Sprite.extend({
 
     closeTo: function( playerPos ) {
         var myPos = this.getPosition();
-        return ( ( Math.abs( myPos.x - playerPos.x ) <= 20 ) &&
-        ( Math.abs( myPos.y - playerPos.y ) <= 20 ) );
+        return ( ( Math.abs( myPos.x - playerPos.x ) <= 30 ) &&
+        ( Math.abs( myPos.y - playerPos.y ) <= 30 ) );
     }
     
 });

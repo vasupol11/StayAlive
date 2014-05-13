@@ -1,11 +1,13 @@
 var GameLayer2 = cc.LayerColor.extend({
     init: function() {
 
-        this.isDead = false;
-        this.score = 0;  
+        this.isDead = false; 
         this.coins = [];
+        this.obstacles = [];
         this._super( new cc.Color4B( 127, 127, 127, 255 ) );
         this.setPosition( new cc.Point( 0, 0 ) );
+        this.coinsAmountOnScreen = this.coins.length;
+        this.sceneNumber = 2;
         
         this.addBackground();
         this.addMaze();       
@@ -29,7 +31,7 @@ var GameLayer2 = cc.LayerColor.extend({
 
     addMaze: function(){
 
-        this.maze = new Map1();
+        this.maze = new Map1(2);
         this.maze.setPosition( cc.p( 0, 0 ) );
         this.addChild( this.maze );
     
@@ -39,12 +41,12 @@ var GameLayer2 = cc.LayerColor.extend({
 
 
         this.coin = new Coin();
-        this.coin.setPosition(200,300);
+        this.coin.setPosition(160,300);
         this.coin.setScale(1.5);
         this.addChild(this.coin);
 
         this.coin2 = new Coin();
-        this.coin2.setPosition(300,300);
+        this.coin2.setPosition(145,300);
         this.coin2.setScale(1.5);
         this.addChild(this.coin2);
 
@@ -54,11 +56,47 @@ var GameLayer2 = cc.LayerColor.extend({
     
     },
 
+    inputObstacleDetail: function(name){
+        
+    },
+
     addObstacle: function(){
 
         this.obstacle = new Obstacle( this.maze );
-        this.obstacle.setPosition(300,380);
-        this.addChild( this.obstacle);
+        this.obstacle.setPosition(300,360);        
+        this.addChild(this.obstacle);
+        this.obstacle.velocity = 0.8;
+        this.obstacle.topBoundary = 420;
+        this.obstacle.bottomBoundary = 360;
+        this.obstacle.directionUpDown = true;
+        this.obstacles.push(this.obstacle);
+
+        this.obstacle2 = new Obstacle( this.maze );
+        this.obstacle2.setPosition(320,360);        
+        this.addChild(this.obstacle2);
+        this.obstacle2.velocity = 0.8;
+        this.obstacle2.topBoundary = 420;
+        this.obstacle2.bottomBoundary = 360;
+        this.obstacle2.directionUpDown = true;
+        this.obstacles.push(this.obstacle2);
+
+        this.obstacle3 = new Obstacle( this.maze );
+        this.obstacle3.setPosition(200,320);
+        this.obstacle3.directionLeftRight = true;
+        this.addChild( this.obstacle3 );
+        this.obstacles.push(this.obstacle3);
+
+        this.obstacle4 = new Obstacle( this.maze );
+        this.obstacle4.setPosition(200,260);
+        this.obstacle4.directionLeftRight = true;
+        this.addChild( this.obstacle4 );
+        this.obstacles.push(this.obstacle4);
+
+        this.obstacle5 = new Obstacle( this.maze );
+        this.obstacle5.setPosition(200,200);
+        this.obstacle5.directionLeftRight = true;
+        this.addChild( this.obstacle5 );
+        this.obstacles.push(this.obstacle5);
 
     },
     
@@ -72,7 +110,7 @@ var GameLayer2 = cc.LayerColor.extend({
 
     addScore: function(){
 
-        this.scoreLabel = cc.LabelTTF.create( '0', 'Arial', 40 );
+        this.scoreLabel = cc.LabelTTF.create( score, 'Arial', 40 );
         this.scoreLabel.setPosition( new cc.Point( 750, 550 ) );
         this.addChild( this.scoreLabel );  
     
@@ -111,14 +149,21 @@ var GameLayer2 = cc.LayerColor.extend({
     },
 
     increaseScore: function(){
-        this.scoreLabel.setString( this.score += 1 );
+        this.scoreLabel.setString( score += 1 );
     },
 
     collectCoin: function( obj ){
         if (obj.closeTo(this.player)){
-             console.log(this.player.getOpacity());
             this.removeChild(obj);
+            this.coinsAmountOnScreen -= 1;
         }
+    },
+
+    removeCoin: function( ){
+        for(var i = 0; i < this.coins.length; i++){
+            this.removeChild(this.coins[i]);
+        }
+        this.coins = [];
     },
 
     hitObstacle: function(obj){
@@ -130,6 +175,8 @@ var GameLayer2 = cc.LayerColor.extend({
             }
         }  
         else if (this.isDead == true && this.player.getOpacity() == 50){
+            this.removeCoin();
+            this.addCoin();
             this.increaseScore();
             this.repositionPlayer();
             this.player.setOpacity(255);
@@ -151,7 +198,9 @@ var GameLayer2 = cc.LayerColor.extend({
             this.collectCoin(this.coins[i]);
         }
 
-        this.hitObstacle(this.obstacle);
+         for(var i = 0; i < this.obstacles.length; i++){
+            this.hitObstacle(this.obstacles[i]);
+        }
    
     }
 

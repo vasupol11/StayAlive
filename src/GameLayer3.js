@@ -1,4 +1,4 @@
-var GameLayer = cc.LayerColor.extend({
+var GameLayer3 = cc.LayerColor.extend({
     init: function() {
 
         this.isDead = false;
