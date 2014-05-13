@@ -190,7 +190,7 @@ var GameLayer3 = cc.LayerColor.extend({
 
     addScore: function(){
 
-        this.scoreLabel = cc.LabelTTF.create( '0', 'Arial', 40 );
+        this.scoreLabel = cc.LabelTTF.create( score, 'Arial', 40 );
         this.scoreLabel.setPosition( new cc.Point( 750, 550 ) );
         this.addChild( this.scoreLabel );  
     

@@ -86,10 +86,10 @@ var Player = cc.Sprite.extend({
     switchScene: function(){
         switch (this.game.sceneNumber){
             case 1:
-                cc.Director.getInstance().replaceScene( new StartScene2());
+                cc.Director.getInstance().replaceScene(cc.TransitionFade.create(0.5, new StartScene2()) );
                 break;
             case 2:
-                cc.Director.getInstance().replaceScene( new StartScene3());
+                cc.Director.getInstance().replaceScene(cc.TransitionFade.create(0.5, new StartScene3()) );
                 break;
         }
     },

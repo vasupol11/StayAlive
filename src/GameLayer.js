@@ -8,6 +8,8 @@ var GameLayer = cc.LayerColor.extend({
         this.setPosition( new cc.Point( 0, 0 ) );
         this.sceneNumber = 1;
 
+        var audioEngine = cc.AudioEngine.getInstance();
+        audioEngine.playMusic( 'Sound/sound.ogg', true);
 
         this.addBackground(1);
         this.addMaze();       
@@ -116,7 +118,7 @@ var GameLayer = cc.LayerColor.extend({
 
     addScore: function(){
 
-        this.scoreLabel = cc.LabelTTF.create( '0', 'Arial', 40 );
+        this.scoreLabel = cc.LabelTTF.create( score, 'Arial', 40 );
         this.scoreLabel.setPosition( new cc.Point( 750, 550 ) );
         this.addChild( this.scoreLabel );  
     
@@ -125,7 +127,7 @@ var GameLayer = cc.LayerColor.extend({
     addMessage: function(){
         
         this.messageLabel = cc.LabelTTF.create( 
-                        "Collect all the coins and \nreach the pink space. " +
+                        "Collect all the coins and \nget to the pink square. " +
                         "Your number \nof deaths will be recorded."  , 'Arial'
                         , 20 );
         this.messageLabel.setPosition( new cc.Point(220,350 ) );

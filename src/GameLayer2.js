@@ -11,7 +11,7 @@ var GameLayer2 = cc.LayerColor.extend({
         this.addBackground(2);
         this.addMaze();       
         this.addCoin();
-        //this.addObstacle(2);
+        this.addObstacle(2);
         this.addPlayer();
         this.addScore();     
         this.scheduleUpdate();
@@ -107,29 +107,29 @@ var GameLayer2 = cc.LayerColor.extend({
         this.obstacles.push(this.obstacle7);
 ///// right
         this.obstacle = new Obstacle( level );
-        this.obstacle.setPosition(590,170);
+        this.obstacle.setPosition(615,170);
         this.obstacle.directionLeftRight = true;
         this.obstacle.velocity = 2;
-        this.obstacle.leftBoundary = 590;
-        this.obstacle.rightBoundary = 660;
+        this.obstacle.leftBoundary = 615;
+        this.obstacle.rightBoundary = 685;
         this.addChild( this.obstacle );
         this.obstacles.push(this.obstacle);
 
         this.obstacle = new Obstacle( level );
-        this.obstacle.setPosition(660,210);
+        this.obstacle.setPosition(685,210);
         this.obstacle.directionLeftRight = true;
         this.obstacle.velocity = 2;
-        this.obstacle.leftBoundary = 590;
-        this.obstacle.rightBoundary = 660;
+        this.obstacle.leftBoundary = 615;
+        this.obstacle.rightBoundary = 685;
         this.addChild( this.obstacle );
         this.obstacles.push(this.obstacle);
 
         this.obstacle = new Obstacle( level );
-        this.obstacle.setPosition(590,250);
+        this.obstacle.setPosition(615,250);
         this.obstacle.directionLeftRight = true;
         this.obstacle.velocity = 2;
-        this.obstacle.leftBoundary = 590;
-        this.obstacle.rightBoundary = 660;
+        this.obstacle.leftBoundary = 615;
+        this.obstacle.rightBoundary = 685;
         this.addChild( this.obstacle );
         this.obstacles.push(this.obstacle);
 
@@ -208,7 +208,7 @@ var GameLayer2 = cc.LayerColor.extend({
 
     addScore: function(){
 
-        this.scoreLabel = cc.LabelTTF.create( '0', 'Arial', 40 );
+        this.scoreLabel = cc.LabelTTF.create( score, 'Arial', 40 );
         this.scoreLabel.setPosition( new cc.Point( 750, 550 ) );
         this.addChild( this.scoreLabel );  
     
