@@ -11,7 +11,7 @@ var GameLayer2 = cc.LayerColor.extend({
         this.addBackground(2);
         this.addMaze();       
         this.addCoin();
-        this.addObstacle(2);
+        //this.addObstacle(2);
         this.addPlayer();
         this.addScore();     
         this.scheduleUpdate();

@@ -90,6 +90,7 @@ var Player = cc.Sprite.extend({
                 break;
             case 2:
                 cc.Director.getInstance().replaceScene( new StartScene3());
+                break;
         }
     },
 

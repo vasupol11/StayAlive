@@ -14,7 +14,8 @@ var GameLayer = cc.LayerColor.extend({
         this.addPlayer();
         this.addCoin();
         this.addObstacle(1);
-        this.addScore();     
+        this.addScore();    
+        this.addMessage(); 
         this.scheduleUpdate();
         this.setKeyboardEnabled( true );
         
@@ -118,6 +119,17 @@ var GameLayer = cc.LayerColor.extend({
         this.scoreLabel = cc.LabelTTF.create( '0', 'Arial', 40 );
         this.scoreLabel.setPosition( new cc.Point( 750, 550 ) );
         this.addChild( this.scoreLabel );  
+    
+    },
+
+    addMessage: function(){
+        
+        this.messageLabel = cc.LabelTTF.create( 
+                        "Collect all the coins and \nreach the pink space. " +
+                        "Your number \nof deaths will be recorded."  , 'Arial'
+                        , 20 );
+        this.messageLabel.setPosition( new cc.Point(220,350 ) );
+        this.addChild( this.messageLabel ); 
     
     },
 

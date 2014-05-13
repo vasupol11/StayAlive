@@ -11,7 +11,11 @@ var Background = cc.Sprite.extend({
     			this.initWithFile( 'Images/pinkBlueBG.png' );
     			break;
     		case 2:
-    			this.initWithFile( 'Images/orangeGrayBG.png')
+    			this.initWithFile( 'Images/orangeGrayBG.png' );
+                break;
+            case 3:
+                this.initWithFile( 'Images/lightBlueGreenBG.png' );
+                break;
     	}
     }
 });

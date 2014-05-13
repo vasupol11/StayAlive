@@ -13,8 +13,8 @@ var Obstacle = cc.Sprite.extend({
         this.bottomBoundary = 350;
     },
 
-    pickImages: function( level ){
-        switch (level){
+    pickImages: function( choice ){
+        switch (choice){
             case 1:
                 this.initWithFile( 'Images/obstacle_red.png' ); 
                 break;
