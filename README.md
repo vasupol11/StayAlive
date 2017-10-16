@@ -1,4 +1,4 @@
-stayalive
+StayAlive
 =========
 
-stayalive project
+StayAlive project
